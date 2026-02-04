@@ -7,7 +7,7 @@ type Props = {
   clearError: () => void;
 };
 
-export const Error: React.FC<Props> = ({ error, clearError }) => {
+export const ErrorNotification: React.FC<Props> = ({ error, clearError }) => {
   return (
     <div
       data-cy="ErrorNotification"

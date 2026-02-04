@@ -4,13 +4,13 @@ import { Todo } from '../types/Todo';
 
 type Props = {
   todo: Todo;
-  loading?: boolean;
+  isLoading: boolean;
   onDelete?: (id: number) => void;
 };
 
 export const TodoItem: React.FC<Props> = ({
   todo,
-  loading = false,
+  isLoading = false,
   onDelete,
 }) => {
   return (
@@ -25,7 +25,7 @@ export const TodoItem: React.FC<Props> = ({
           className="todo__status"
           checked={todo.completed}
           aria-label="Toggle todo status"
-          disabled={loading}
+          disabled={isLoading}
           readOnly
         />
       </label>
@@ -34,21 +34,19 @@ export const TodoItem: React.FC<Props> = ({
         {todo.title}
       </span>
 
-      {/* Remove button appears only on hover */}
       <button
         type="button"
         className="todo__remove"
         data-cy="TodoDelete"
-        disabled={loading}
+        disabled={isLoading}
         onClick={() => onDelete?.(todo.id)}
       >
         ×
       </button>
 
-      {/* overlay will cover the todo while it is being deleted or updated */}
       <div
         data-cy="TodoLoader"
-        className={classNames('modal overlay', { 'is-active': loading })}
+        className={classNames('modal overlay', { 'is-active': isLoading })}
       >
         <div className="modal-background has-background-white-ter" />
         <div className="loader" />
